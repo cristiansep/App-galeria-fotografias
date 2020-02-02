@@ -1,0 +1,66 @@
+<div class="content">
+    <h2>Agregar nueva fotografia</h2>
+
+
+    <form #nuevaFoto="ngForm" (ngSubmit)="agregar()" class="row">
+
+        <mat-form-field class="col-sm-12">
+         <input 
+         matInput type="text" 
+         #nombre="ngModel" 
+         name="nombre" 
+         [(ngModel)]="fotografia.foto" 
+         required
+         placeholder="Fotografia"
+         autofocus>
+         <mat-error *ngIf="nombre.invalid">El nombre es obligatorio</mat-error>
+        </mat-form-field>
+       
+        
+        <mat-form-field class="col-sm-12">
+            <input matInput 
+            type="text" 
+            #descripcion="ngModel" 
+            name="descripcion" 
+            [(ngModel)]="fotografia.descripcion" 
+            placeholder="Descripcion">
+           </mat-form-field>
+
+           <mat-form-field class="col-sm-12">
+            <input matInput 
+            type="text" 
+            #autor="ngModel" 
+            name="autor" 
+            [(ngModel)]="fotografia.autor" 
+            required
+            placeholder="Autor">
+            <mat-error *ngIf="autor.invalid">El autor es requerido</mat-error>
+           </mat-form-field>
+
+           <mat-form-field class="col-sm-12">
+            <input matInput 
+            type="number" 
+            #numero="ngModel" 
+            name="numero" 
+            [(ngModel)]="fotografia.numero" 
+            required
+            placeholder="Numero">
+            <mat-error *ngIf="numero.invalid">El numero es requerido</mat-error>
+           </mat-form-field>
+
+           <mat-form-field class="col-sm-12">
+               <input matInput type="text" disabled>
+               <input #file type="file" style="display: none" (change)="fileChangeEvent($event)">
+               <div>{{image_selected}}</div>
+                <button mat-mini-fab color="primary" matSuffix type="button" (click)="file.click()">
+                    <mat-icon>attach_file</mat-icon>
+                </button>
+           </mat-form-field>
+
+           <mat-checkbox class="col-sm-12" color="primary" name="activo"  [(ngModel)]="fotografia.activo" >Activo</mat-checkbox>
+
+           <button [routerLink]="['/admin/list']" mat-raised-button class="btn" color="default" type="button">Cancelar</button>
+           <button [disabled]="!nuevaFoto.form.valid" mat-raised-button class="btn" color="primary" type="submit">Guardar</button>
+
+    </form>
+</div>
